@@ -12,6 +12,7 @@ paths:
       description: Generate text using Gemini AI
       summary: Generate text using Gemini AI
       requestBody:
+        required: true
         content:
           application/json:
             schema:
@@ -20,6 +21,73 @@ paths:
                 prompt:
                   type: string
                   example: "Apa itu Knowledge Graph?"
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: number
+                    example: 200
+                  status:
+                    type: string
+                    example: "OK"
+                  result:
+                    type: string
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: number
+                    example: 400
+                  status:
+                    type: string
+                    example: "Bad Request"
+                  message:
+                    type: string
+                    example: "Prompt is required"
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: number
+                    example: 500
+                  status:
+                    type: string
+                    example: "Internal Server Error"
+                  result:
+                    type: string
+  /generate-from-image:
+    post:
+      tags:
+          - Gemini API
+      description: Generate from image using Gemini AI
+      summary: Generate from image using Gemini AI
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                prompt:
+                  type: string
+                  example: "Berikan informasi sumber dari gambar ini?"
+                image:
+                  type: string
+                  format: binary
+                  description: "Image file to be uploaded"
       responses:
         '200':
           description: OK
