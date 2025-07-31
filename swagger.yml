@@ -68,12 +68,12 @@ paths:
                     example: "Internal Server Error"
                   result:
                     type: string
-  /generate-from-image:
+  /generate-with-attachment:
     post:
       tags:
           - Gemini API
-      description: Generate from image using Gemini AI
-      summary: Generate from image using Gemini AI
+      description: Generate with attachment using Gemini AI
+      summary: Generate with attachment using Gemini AI
       requestBody:
         required: true
         content:
@@ -84,10 +84,10 @@ paths:
                 prompt:
                   type: string
                   example: "Berikan informasi sumber dari gambar ini?"
-                image:
+                attachment:
                   type: string
                   format: binary
-                  description: "Image file to be uploaded"
+                  description: "Attachment file to be uploaded"
       responses:
         '200':
           description: OK
