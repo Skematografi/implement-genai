@@ -1,19 +1,44 @@
-import { GoogleGenAI } from "@google/genai";
-import dotenv from 'dotenv';
+import 'dotenv/config';
+import express from 'express';
+import genai from './genai.js';
 
-dotenv.config();
+const app = express();
 
-const ai = new GoogleGenAI({
-    apiKey: process.env.GEMINI_API_KEY,
+app.use(express.json());
+
+app.post('/api/v1/generate-text', async (req, res) => {
+    try {
+        const { prompt } = req.body;
+
+        if (!prompt) {
+            return res.status(400).json({
+              code: 400,
+              status: 'Bad Request',
+              message: 'Prompt is required'
+            });
+        }
+
+        const response = await genai(prompt);
+
+        res.json({
+            code: 200,
+            status: 'OK',
+            result: response
+        });
+
+    } catch (error) {
+        res.status(500).json({
+          code: 500,
+          status: 'Internal Server Error',
+          message: error.message
+        });
+    }
 });
 
-async function main() {
-  const response = await ai.models.generateContent({
-    model: process.env.GEMINI_MODEL,
-    contents: "Apa itu Knowledge Graph?",
-  });
 
-  console.log(response.text);
-}
+// Start the server
+const PORT = process.env.PORT || 3000;
 
-main();
+app.listen(PORT, () => 
+  console.log(`Server is running on port ${PORT}`)
+);
