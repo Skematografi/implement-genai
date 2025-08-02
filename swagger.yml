@@ -3,7 +3,7 @@ info:
   title: Implement Gemini API
   version: '1.0'
 servers:
-  - url: http://localhost:8080/api/v1
+  - url: http://localhost:3000/api/v1
 paths:
   /generate-text:
     post:
@@ -135,4 +135,71 @@ paths:
                     example: "Internal Server Error"
                   result:
                     type: string
-
+  /chat:
+    post:
+      tags:
+          - Gemini API
+      description: Unified chat endpoint for text and optional attachments
+      summary: Chat with Gemini AI (text or text + attachment)
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                prompt:
+                  type: string
+                  example: "Hello, Gemini!"
+                  description: "Text prompt for the chat"
+                attachment:
+                  type: string
+                  format: binary
+                  description: "Optional attachment file (image, audio, PDF)"
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: number
+                    example: 200
+                  status:
+                    type: string
+                    example: "OK"
+                  result:
+                    type: string
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: number
+                    example: 400
+                  status:
+                    type: string
+                    example: "Bad Request"
+                  message:
+                    type: string
+                    example: "Either prompt or attachment is required."
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: number
+                    example: 500
+                  status:
+                    type: string
+                    example: "Internal Server Error"
+                  result:
+                    type: string
