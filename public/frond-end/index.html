@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gemini AI Chatbot</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="chatbot-container">
+        <div class="chatbot-header">
+            <img src="asset/Google_Gemini_logo.svg" alt="Gemini AI Logo" class="chatbot-logo">
+            <button id="clearChatButton" class="clear-chat-button" title="Clear Chat">
+                <i class="fa-solid fa-trash"></i>
+            </button>
+        </div>
+        <div id="messagesContainer" class="messages-container scrollbar-custom">
+            <div id="messages" class="space-y-5"></div>
+        </div>
+        <div id="attachmentPreviewWrapper">
+            <div id="attachmentPreview" class="attachment-preview hidden"></div>
+        </div>
+        <div id="errorMessageWrapper">
+            <div id="errorMessage" class="error-message hidden"></div>
+        </div>
+        <div class="input-area">
+            <input type="file" id="fileInput" class="file-input">
+            <button id="attachButton" class="attach-button" title="Attach File">
+                <i class="fa-solid fa-paperclip"></i>
+            </button>
+            <input type="text" id="messageInput" class="message-input" placeholder="Ask me anything...">
+            <button id="sendButton" class="send-button" title="Send Message">
+                <i class="fa-solid fa-paper-plane"></i>
+            </button>
+        </div>
+        <div class="disclaimer-text">
+            Gemini can make mistakes, so double-check it.
+        </div>
+    </div>
+    <div class="social-links">
+        <a href="https://www.linkedin.com/in/suwendri-wijaya-bb259512a" target="_blank" title="LinkedIn">
+            <i class="fab fa-linkedin"></i>
+        </a>
+        <a href="https://github.com/Skematografi/implement-genai.git" target="_blank" title="GitHub">
+            <i class="fab fa-github"></i>
+        </a>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
